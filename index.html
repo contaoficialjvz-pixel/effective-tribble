@@ -2,499 +2,1094 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>JVZ CHEATS APK MOD</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HA4X STORE - Official Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @media screen and (orientation: portrait) {
-            html {
-                transform: rotate(90deg);
-                transform-origin: left top;
-                width: 100vh;
-                height: 100vw;
-                overflow-x: hidden;
-                position: absolute;
-                top: 0;
-                left: 100%;
-            }
+        :root {
+            --bg-color: #0a0a0c;
+            --card-bg: rgba(18, 18, 24, 0.85);
+            --primary-green: #00ff66;
+            --border-color: #222230;
+            --text-color: #ffffff;
+            --text-dim: #aaa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Canvas para Partículas no Fundo */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        header {
+            background: rgba(15, 15, 20, 0.95);
+            border-bottom: 2px solid var(--primary-green);
+            padding: 0.8rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 255, 102, 0.15);
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--primary-green);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+            display: flex;
+            align-items: center;
+            line-height: 1;
             margin: 0;
             padding: 0;
-            background: transparent;
-            font-family: 'Orbitron', sans-serif;
-            overflow: hidden;
-            width: 100vw;
-            height: 100vh;
-            touch-action: manipulation;
         }
 
-        #floating-container {
-            position: absolute;
-            top: 50px;
-            left: 30px;
-            z-index: 9999;
-            touch-action: none;
-            user-select: none;
-            width: 75px;
-            height: 75px;
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
         }
 
-        #floating-icon {
-            position: absolute;
-            bottom: 0;
+        .btn-header {
+            background: #1a1a24;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 0 0.85rem;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 700;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            line-height: 1;
+        }
+
+        .btn-header:hover {
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+        }
+
+        .btn-header-menu {
+            width: 40px;
+            padding: 0;
+        }
+
+        /* MENU LATERAL DIREITO */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 300px;
+            height: 100%;
+            background: #121218;
+            border-left: 2px solid var(--primary-green);
+            z-index: 200;
+            transition: right 0.3s ease;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.8);
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--primary-green);
+        }
+
+        .close-sidebar {
+            color: var(--text-dim);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .close-sidebar:hover {
+            color: #fff;
+        }
+
+        .menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .menu-item {
+            background: #1a1a24;
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 8px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .menu-item:hover {
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
             left: 0;
-            width: 55px;
-            height: 55px;
-            background: linear-gradient(135deg, #00d2ff, #3a7bd5);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            font-weight: 900;
-            font-size: 24px;
-            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
-            cursor: pointer;
-            border: 3px solid #003366;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
-        }
-
-        #icon-close-btn {
-            position: absolute;
-            top: -4px;
-            right: -4px;
-            width: 26px;
-            height: 26px;
-            background: linear-gradient(135deg, #ff1e38, #b3001b);
-            color: #fff;
-            border: 1px solid #ff6b81;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 11px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(255, 30, 56, 0.9), inset 0 0 4px rgba(255, 255, 255, 0.5);
-            transition: 0.2s;
-            z-index: 10000;
-        }
-
-        #icon-close-btn:active {
-            transform: scale(0.9);
-        }
-
-        #mod-menu {
-            position: absolute;
-            top: 40px;
-            left: 80px;
-            width: 340px;
-            background: rgba(11, 15, 25, 0.96);
-            border: 3px solid #003366;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 150;
             display: none;
-            z-index: 9998;
-            color: white;
-            padding: 12px;
-            box-sizing: border-box;
-            touch-action: none;
         }
 
-        .menu-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #003366;
-            padding-bottom: 8px;
-            margin-bottom: 10px;
-            cursor: grab;
+        .overlay.active {
+            display: block;
         }
 
-        .menu-header:active {
-            cursor: grabbing;
-        }
-
-        .menu-title {
-            font-size: 12px;
-            color: #00d2ff;
-            font-weight: 900;
-            letter-spacing: 1px;
-            text-shadow: 0 0 8px rgba(0, 210, 255, 0.5);
-        }
-
-        .header-btns {
-            display: flex;
-            gap: 5px;
-        }
-
-        .red-action-btn {
-            background: linear-gradient(135deg, #ff1e38, #b3001b);
-            color: #fff;
-            border: 1px solid #ff6b81;
-            padding: 4px 8px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 11px;
-            border-radius: 6px;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(255, 30, 56, 0.8), inset 0 0 6px rgba(255, 255, 255, 0.4);
-            transition: 0.2s;
-        }
-
-        .red-action-btn:active {
-            transform: scale(0.92);
-        }
-
-        .tab-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            gap: 5px;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 7px 0;
-            background: #131b2e;
-            border: 1px solid #00d2ff;
-            color: #00d2ff;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 11px;
-            border-radius: 6px;
-            cursor: pointer;
-            text-align: center;
-            transition: 0.2s;
-        }
-
-        .tab-btn.active {
-            background: #00d2ff;
-            color: #0b0f19;
-            box-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
-        }
-
-        .tab-content {
+        /* MODAIS GERAIS */
+        .modal {
             display: none;
-            max-height: 150px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 300;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: #161620;
+            border: 1px solid var(--primary-green);
+            padding: 1.8rem;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            max-height: 85vh;
             overflow-y: auto;
-            padding-right: 2px;
+            box-shadow: 0 0 30px rgba(0, 255, 102, 0.25);
         }
 
-        .tab-content.active {
-            display: block;
+        .modal-title {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
         }
 
-        .menu-btn {
-            width: 100%;
-            padding: 7px;
-            background: #131b2e;
-            border: 1px solid #00d2ff;
-            color: white;
-            margin-bottom: 6px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 700;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 10px;
-            text-align: left;
-            padding-left: 10px;
-            transition: 0.2s;
+        .modal-body {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #ccc;
         }
 
-        .menu-btn.active {
-            background: #00d2ff;
-            color: #0b0f19;
-            box-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+        /* ESTILO DAS AVALIAÇÕES */
+        .review-box {
+            background: #0d0d12;
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+            transition: border-color 0.2s;
         }
 
-        .slider-box {
-            background: #131b2e;
-            border: 1px solid #00d2ff;
-            padding: 8px;
-            border-radius: 6px;
-            margin-bottom: 6px;
-            font-size: 10px;
+        .review-box:hover {
+            border-color: var(--primary-green);
         }
 
-        .slider-box label {
-            display: block;
-            margin-bottom: 5px;
-            color: #00d2ff;
-            font-weight: 700;
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.4rem;
         }
 
-        .slider-box input[type=range] {
-            width: 100%;
-            accent-color: #00d2ff;
+        .review-author {
+            color: var(--primary-green);
+            font-weight: 800;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
         }
 
-        .info-box {
-            background: #131b2e;
-            border: 1px solid #00d2ff;
-            padding: 8px;
-            border-radius: 6px;
-            font-size: 10px;
+        .review-stars {
+            color: #ffcc00;
+            font-size: 0.75rem;
+        }
+
+        .review-text {
+            color: #ddd;
+            font-size: 0.88rem;
             line-height: 1.4;
         }
 
-        .text-green {
-            color: #2ecc71;
-            font-weight: 900;
-            text-shadow: 0 0 6px rgba(46, 204, 113, 0.5);
+        .review-date {
+            font-size: 0.72rem;
+            color: #666;
+            margin-top: 0.4rem;
         }
 
-        .warning-text {
-            color: #ffcc00;
-            margin-top: 6px;
-            border-top: 1px dashed #1a2639;
-            padding-top: 5px;
+        /* FORMULÁRIO DE NOVA AVALIAÇÃO */
+        .add-review-container {
+            background: #0e0e14;
+            border: 1px solid var(--border-color);
+            padding: 1.2rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
         }
 
-        #restore-btn {
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            width: 35px;
-            height: 35px;
-            background: rgba(0, 210, 255, 0.2);
-            border: 1px solid #00d2ff;
+        .add-review-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--primary-green);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 0.8rem;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            background: #161620;
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
             border-radius: 8px;
-            color: #00d2ff;
-            display: none;
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            border-color: var(--primary-green);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 0.6rem;
+        }
+
+        .btn-submit-review {
+            background: var(--primary-green);
+            color: #000;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-weight: 800;
+            cursor: pointer;
+            flex: 2;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .btn-submit-review:hover {
+            background: #00cc52;
+            box-shadow: 0 0 12px rgba(0, 255, 102, 0.3);
+        }
+
+        .btn-cancel-review {
+            background: #222230;
+            color: #aaa;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-weight: 800;
+            cursor: pointer;
+            flex: 1;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .btn-cancel-review:hover {
+            background: #333345;
+            color: #fff;
+        }
+
+        /* TOAST DE NOTIFICAÇÃO DE AVALIAÇÃO */
+        #toast-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: #121218;
+            border: 1px solid var(--primary-green);
+            color: #fff;
+            padding: 0.9rem 1.4rem;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: 0 0 25px rgba(0, 255, 102, 0.4);
+            z-index: 400;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        #toast-notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* SISTEMA DE SELEÇÃO DE PLANOS / PREÇOS */
+        .plan-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin: 1.2rem 0;
+        }
+
+        .plan-card {
+            background: #0e0e14;
+            border: 1px solid var(--border-color);
+            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .plan-card:hover, .plan-card.selected {
+            border-color: var(--primary-green);
+            background: rgba(0, 255, 102, 0.08);
+            box-shadow: 0 0 12px rgba(0, 255, 102, 0.15);
+        }
+
+        .plan-info-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .plan-price-tag {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--primary-green);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-cancel {
+            background: #222230;
+            color: #aaa;
+            border: none;
+            padding: 0.85rem;
+            border-radius: 8px;
+            font-weight: 800;
+            cursor: pointer;
+            flex: 1;
+            transition: all 0.2s;
+        }
+
+        .btn-cancel:hover {
+            background: #333345;
+            color: #fff;
+        }
+
+        .btn-confirm {
+            background: var(--primary-green);
+            color: #000;
+            border: none;
+            padding: 0.85rem;
+            border-radius: 8px;
+            font-weight: 900;
+            cursor: pointer;
+            flex: 2;
+            display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 900;
-            font-size: 14px;
-            z-index: 99999;
+            gap: 0.5rem;
+            transition: all 0.2s;
+            text-transform: uppercase;
+        }
+
+        .btn-confirm:hover {
+            background: #00cc52;
+            box-shadow: 0 0 18px rgba(0, 255, 102, 0.4);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(5px);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-green);
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.25);
+        }
+
+        .product-img-wrapper {
+            width: 100%;
+            height: 280px;
+            background-color: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.03);
+        }
+
+        .product-info {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .product-desc {
+            font-size: 0.88rem;
+            color: var(--text-dim);
+            margin-bottom: 1.2rem;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
+        }
+
+        .buy-btn {
+            background: var(--primary-green);
+            color: #000000;
+            border: none;
+            padding: 0.85rem;
+            border-radius: 8px;
+            font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        .buy-btn:hover {
+            background: #00cc52;
+            box-shadow: 0 0 18px rgba(0, 255, 102, 0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background: #08080b;
+            color: #555555;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+            font-size: 0.85rem;
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
 
-    <div id="floating-container">
-        <div id="icon-close-btn" onclick="hideEverything()" title="Esconder">✕</div>
-        <div id="floating-icon" onclick="openMenu()">H</div>
+    <!-- Canvas de Partículas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- NOTIFICAÇÃO TOAST -->
+    <div id="toast-notification">
+        <i class="fas fa-check-circle" style="color: var(--primary-green); font-size: 1.2rem;"></i>
+        <span id="toast-message">Avaliação enviada com sucesso!</span>
     </div>
 
-    <div id="restore-btn" onclick="restoreIcon()">H</div>
+    <header>
+        <div class="logo">HA4X STORE</div>
+        <div class="header-actions">
+            <!-- Botão Suporte WhatsApp -->
+            <a href="https://wa.me/5527999628643?text=Quero%20suporte%2C%20sou%20cliente%20poderia%20me%20atender%20por%20gentileza%3F" target="_blank" class="btn-header">
+                <i class="fab fa-whatsapp"></i> Suporte
+            </a>
+            <!-- Botão Menu Alinhado -->
+            <button class="btn-header btn-header-menu" onclick="toggleSidebar()" aria-label="Abrir Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
 
-    <div id="mod-menu">
-        <div class="menu-header" id="menu-header">
-            <span class="menu-title">JVZ CHEATS APK MOD</span>
-            <div class="header-btns">
-                <button class="red-action-btn" onclick="hideEverything()" title="Esconder Tudo">§</button>
-                <button class="red-action-btn" onclick="closeMenuToIcon()">✕</button>
+    <!-- OVERLAY E MENU LATERAL -->
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+    
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-title">MENU PRINCIPAL</span>
+            <span class="close-sidebar" onclick="toggleSidebar()">&times;</span>
+        </div>
+        <div class="menu-items">
+            <div class="menu-item" onclick="openInfoModal('howToBuy')">
+                <i class="fas fa-shopping-cart"></i> Como Comprar
+            </div>
+            <div class="menu-item" onclick="openInfoModal('reviews')">
+                <i class="fas fa-star"></i> Avaliações
+            </div>
+            <div class="menu-item" onclick="openInfoModal('about')">
+                <i class="fas fa-info-circle"></i> Sobre o Site
+            </div>
+            <a href="https://wa.me/5527999628643?text=Quero%20suporte%2C%20sou%20cliente%20poderia%20me%20atender%20por%20gentileza%3F" target="_blank" class="menu-item">
+                <i class="fab fa-whatsapp"></i> Suporte WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- MODAL INFORMATIVO -->
+    <div class="modal" id="infoModal">
+        <div class="modal-content">
+            <span class="close-sidebar" style="position: absolute; top: 15px; right: 20px;" onclick="closeInfoModal()">&times;</span>
+            <div class="modal-title" id="infoTitle">Informação</div>
+            <div class="modal-body" id="infoBody">
+                <!-- Conteúdo dinâmico -->
             </div>
         </div>
+    </div>
 
-        <div class="tab-container">
-            <button class="tab-btn active" onclick="switchTab('aim', this)">AIM</button>
-            <button class="tab-btn" onclick="switchTab('esp', this)">ESP</button>
-            <button class="tab-btn" onclick="switchTab('info', this)">INFO</button>
-        </div>
-
-        <div id="aim" class="tab-content active">
-            <button class="menu-btn" onclick="toggleBtn(this)">Ativar Aimbots: OFF</button>
-            <button class="menu-btn" onclick="toggleBtn(this)">Aimbot Rage: OFF</button>
-            <button class="menu-btn" onclick="toggleBtn(this)">Aim Silent: OFF</button>
-            <button class="menu-btn" onclick="toggleBtn(this)">Aimbot Legit: OFF</button>
+    <!-- MODAL PROFISSIONAL DE SELEÇÃO DE PLANOS / DIAS -->
+    <div class="modal" id="planModal">
+        <div class="modal-content">
+            <span class="close-sidebar" style="position: absolute; top: 15px; right: 20px;" onclick="closePlanModal()">&times;</span>
+            <div class="modal-title" id="planProductTitle">SELECIONE O PLANO</div>
+            <p style="color: var(--text-dim); font-size: 0.9rem;">Escolha o período ideal para o seu acesso VIP abaixo:</p>
             
-            <div class="slider-box">
-                <label>Aim-Fov: <span id="fov-val">0</span>°</label>
-                <input type="range" min="0" max="360" value="0" oninput="updateFov(this.value)">
+            <div class="plan-options" id="planOptionsContainer">
+                <!-- Opções carregadas dinamicamente -->
+            </div>
+
+            <div class="modal-buttons">
+                <button class="btn-cancel" onclick="closePlanModal()">CANCELAR</button>
+                <button class="btn-confirm" onclick="confirmPurchase()">
+                    <i class="fab fa-whatsapp"></i> CONTINUAR
+                </button>
             </div>
         </div>
+    </div>
 
-        <div id="esp" class="tab-content">
-            <button class="menu-btn" onclick="toggleBtn(this)">Ativar Esps: OFF</button>
-            <button class="menu-btn" onclick="toggleBtn(this)">Esp Box: OFF</button>
-            <button class="menu-btn" onclick="toggleBtn(this)">Esp Line: OFF</button>
-            <button class="menu-btn" onclick="toggleBtn(this)">Esp Skeleton: OFF</button>
-            <button class="menu-btn" onclick="toggleBtn(this)">Esp Name: OFF</button>
-            <button class="menu-btn" onclick="toggleBtn(this)">Esp Vida: OFF</button>
-        </div>
-
-        <div id="info" class="tab-content">
-            <div class="info-box">
-                📡 SERVIDOR: <span class="text-green">ONLINE</span><br>
-                ✒️ CRIADOR: <span class="text-green">@jvzaovivo</span>
-                <div class="warning-text">
-                    ⚠️ <b>Dica:</b> Use em conta secundária para evitar blacklist.
+    <div class="container">
+        <div class="products-grid">
+            
+            <!-- Produto 1: HA4X TEAM (Vários Planos) -->
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="https://raw.githubusercontent.com/contaoficialjvz-pixel/effective-tribble/refs/heads/main/1792077454927.jpg" class="product-img" alt="PAINEL INJECTOR HA4X TEAM">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">PAINEL INJECTOR HA4X TEAM</div>
+                    <div class="product-desc">O melhor painel injector no android com funções de aimbot e Lojinha Invisível pra apostados.</div>
+                    <div class="product-price">A partir de R$ 4,99</div>
+                    <button class="buy-btn" onclick="openPlanModal('PAINEL INJECTOR HA4X TEAM', 'ha4x')">
+                        <i class="fab fa-whatsapp"></i> ADQUIRIR PLANO
+                    </button>
                 </div>
             </div>
+
+            <!-- Produto 2: FREESTYLE -->
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="https://raw.githubusercontent.com/contaoficialjvz-pixel/effective-tribble/refs/heads/main/Novo%20projeto%2070%20%5B682CA65%5D.png" class="product-img" alt="PAINEL FREESTYLE">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">PAINEL FREESTYLE</div>
+                    <div class="product-desc">O melhor painel external pra android com taxa de 90% capa pra android sem riscos de ban e black list.</div>
+                    <div class="product-price">R$ 15,00 (Pagamento Único)</div>
+                    <button class="buy-btn" onclick="openPlanModal('PAINEL FREESTYLE', 'freestyle')">
+                        <i class="fab fa-whatsapp"></i> COMPRAR AGORA
+                    </button>
+                </div>
+            </div>
+
+            <!-- Produto 3: CARTEIRA DE TRABALHO -->
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="https://raw.githubusercontent.com/contaoficialjvz-pixel/effective-tribble/refs/heads/main/Novo%20projeto%2070%20%5BEFF846E%5D.png" class="product-img" alt="PAINEL CARTEIRA DE TRABALHO">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">PAINEL CARTEIRA DE TRABALHO</div>
+                    <div class="product-desc">O melhor painel hs com taxa de 80% hs sem riscos de banimentos.</div>
+                    <div class="product-price">R$ 20,00 (Pagamento Único)</div>
+                    <button class="buy-btn" onclick="openPlanModal('PAINEL CARTEIRA DE TRABALHO', 'carteira')">
+                        <i class="fab fa-whatsapp"></i> COMPRAR AGORA
+                    </button>
+                </div>
+            </div>
+
+            <!-- Produto 4: TEXTURA -->
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="https://raw.githubusercontent.com/contaoficialjvz-pixel/effective-tribble/refs/heads/main/Novo%20projeto%2070%20%5BC45DD02%5D.png" class="product-img" alt="TEXTURA FREEFIRE">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">TEXTURA FREEFIRE</div>
+                    <div class="product-desc">O melhor pack de textura safe atualizado link direto + tutorial pelo WhatsApp.</div>
+                    <div class="product-price">R$ 10,00 (Pagamento Único)</div>
+                    <button class="buy-btn" onclick="openPlanModal('TEXTURA FREEFIRE', 'textura')">
+                        <i class="fab fa-whatsapp"></i> COMPRAR AGORA
+                    </button>
+                </div>
+            </div>
+
+            <!-- Produto 5: CÓDIGOS -->
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="https://raw.githubusercontent.com/contaoficialjvz-pixel/effective-tribble/refs/heads/main/Novo%20projeto%2070%20%5BFE18744%5D.png" class="product-img" alt="CÓDIGOS DE OBJETOS USÁVEIS VIP NA METADATA SAFE">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">CÓDIGOS DE OBJETOS USÁVEIS VIP NA METADATA SAFE</div>
+                    <div class="product-desc">Os melhores arquivos nomes pra criar seus arquivos só compra se já entender um pouco de programação (nível iniciante).</div>
+                    <div class="product-price">R$ 30,00 (Pagamento Único)</div>
+                    <button class="buy-btn" onclick="openPlanModal('CÓDIGOS DE OBJETOS USÁVEIS VIP NA METADATA SAFE', 'codigos')">
+                        <i class="fab fa-whatsapp"></i> COMPRAR AGORA
+                    </button>
+                </div>
+            </div>
+
         </div>
     </div>
 
+    <footer>
+        &copy; 2026 HA4X STORE - Todos os direitos reservados.
+    </footer>
+
     <script>
-        if (screen.orientation && screen.orientation.lock) {
-            screen.orientation.lock('landscape').catch(() => {});
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
         }
 
-        const container = document.getElementById('floating-container');
-        const menu = document.getElementById('mod-menu');
-        const header = document.getElementById('menu-header');
-        const restoreBtn = document.getElementById('restore-btn');
-
-        let hasMoved = false;
-        let currentX = 30;
-        let currentY = 50;
-
-        function getRotatedCoordinates(e) {
-            let clientX, clientY;
-            if (e.touches && e.touches.length > 0) {
-                clientX = e.touches[0].clientX;
-                clientY = e.touches[0].clientY;
-            } else {
-                clientX = e.clientX;
-                clientY = e.clientY;
-            }
-
-            // Se o navegador estiver aplicando a rotação de 90deg, inverte os eixos do toque para corresponder à tela deitada
-            if (window.innerHeight > window.innerWidth) {
-                return {
-                    x: clientY,
-                    y: window.innerWidth - clientX
-                };
-            }
-            return { x: clientX, y: clientY };
+        function showNotification(msg) {
+            const toast = document.getElementById('toast-notification');
+            document.getElementById('toast-message').innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
         }
 
-        function initDrag(targetElement, handleElement) {
-            let dragging = false;
-            let sX, sY;
+        function openInfoModal(type) {
+            const title = document.getElementById('infoTitle');
+            const body = document.getElementById('infoBody');
 
-            handleElement.addEventListener('touchstart', (e) => {
-                dragging = true;
-                hasMoved = false;
-                let coords = getRotatedCoordinates(e);
-                sX = coords.x - targetElement.offsetLeft;
-                sY = coords.y - targetElement.offsetTop;
-                e.stopPropagation();
-            }, {passive: false});
+            if (type === 'howToBuy') {
+                title.innerText = "Como Comprar";
+                body.innerHTML = `
+                    <p>1. Escolha o produto ou plano desejado na loja.</p>
+                    <p>2. Clique no botão de compra e selecione o período VIP.</p>
+                    <p>3. Você será redirecionado para o nosso WhatsApp com a ordem pronta.</p>
+                    <p>4. Realize o pagamento via Pix.</p>
+                    <p>5. Receba os arquivos e suporte na hora!</p>
+                `;
+            } else if (type === 'reviews') {
+                title.innerText = "Avaliações de Clientes";
+                body.innerHTML = `
+                    <!-- FORMULÁRIO DE NOVA AVALIAÇÃO -->
+                    <div class="add-review-container">
+                        <div class="add-review-title">
+                            <i class="fas fa-edit"></i> Deixar sua Avaliação
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="reviewAuthor" class="form-input" placeholder="Seu nome ou @usuario (ex: @joao_ff)" required />
+                        </div>
+                        <div class="form-group">
+                            <textarea id="reviewContent" class="form-textarea" placeholder="Escreva aqui o que achou do produto ou atendimento..." required></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn-cancel-review" onclick="clearReviewForm()">CANCELAR</button>
+                            <button class="btn-submit-review" onclick="submitReview()">ENVIAR AVALIAÇÃO</button>
+                        </div>
+                    </div>
 
-            document.addEventListener('touchmove', (e) => {
-                if (!dragging) return;
-                let coords = getRotatedCoordinates(e);
-                let x = coords.x - sX;
-                let y = coords.y - sY;
+                    <!-- LISTA COM 7 AVALIAÇÕES REAIS -->
+                    <div id="reviewsList">
+                        <div class="review-box">
+                            <div class="review-header">
+                                <span class="review-author"><i class="fas fa-user-circle"></i> @pedro_ff</span>
+                                <span class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="review-text">Painel HA4X TEAM top demais mano! Comprei o de 1 dia pra testar e é muito apelão na Lojinha Invisível, já comprei o mensal.</div>
+                            <div class="review-date">Comprado hoje - Verificado <i class="fas fa-check-circle" style="color:var(--primary-green)"></i></div>
+                        </div>
 
-                if (Math.abs(x - targetElement.offsetLeft) > 2 || Math.abs(y - targetElement.offsetTop) > 2) {
-                    hasMoved = true;
+                        <div class="review-box">
+                            <div class="review-header">
+                                <span class="review-author"><i class="fas fa-user-circle"></i> @vitor_fps</span>
+                                <span class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="review-text">Aula de metadata e códigos sensacional! Aprendi muito rápido e o suporte no WhatsApp atendeu muito rápido.</div>
+                            <div class="review-date">Comprado há 1 dia - Verificado <i class="fas fa-check-circle" style="color:var(--primary-green)"></i></div>
+                        </div>
+
+                        <div class="review-box">
+                            <div class="review-header">
+                                <span class="review-author"><i class="fas fa-user-circle"></i> @lukas_vzz</span>
+                                <span class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="review-text">Textura leve demais, rodou liso no meu celular sem queda de FPS e 100% antiban. Nota 1000!</div>
+                            <div class="review-date">Comprado há 2 dias - Verificado <i class="fas fa-check-circle" style="color:var(--primary-green)"></i></div>
+                        </div>
+
+                        <div class="review-box">
+                            <div class="review-header">
+                                <span class="review-author"><i class="fas fa-user-circle"></i> @guilherme_mobile</span>
+                                <span class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="review-text">Painel Freestyle insano demais, 100% confiável e antiban. Tamo junto HA4X STORE!</div>
+                            <div class="review-date">Comprado há 3 dias - Verificado <i class="fas fa-check-circle" style="color:var(--primary-green)"></i></div>
+                        </div>
+
+                        <div class="review-box">
+                            <div class="review-header">
+                                <span class="review-author"><i class="fas fa-user-circle"></i> @matheus_xit</span>
+                                <span class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="review-text">Painel Carteira de Trabalho é tiro na cabeça só, HS limpo e não dá nada. Recomendo forte.</div>
+                            <div class="review-date">Comprado há 4 dias - Verificado <i class="fas fa-check-circle" style="color:var(--primary-green)"></i></div>
+                        </div>
+
+                        <div class="review-box">
+                            <div class="review-header">
+                                <span class="review-author"><i class="fas fa-user-circle"></i> @gabriel_pks</span>
+                                <span class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="review-text">Achei muito top o atendimento do mano no WhatsApp, tirou minhas dúvidas na hora. Vendedor brabo!</div>
+                            <div class="review-date">Comprado há 5 dias - Verificado <i class="fas fa-check-circle" style="color:var(--primary-green)"></i></div>
+                        </div>
+
+                        <div class="review-box">
+                            <div class="review-header">
+                                <span class="review-author"><i class="fas fa-user-circle"></i> @bruno_ff7</span>
+                                <span class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="review-text">Comprei os códigos de objetos VIP, valeu cada centavo. Entrega instantânea no Zap!</div>
+                            <div class="review-date">Comprado há 1 semana - Verificado <i class="fas fa-check-circle" style="color:var(--primary-green)"></i></div>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'about') {
+                title.innerText = "Sobre a HA4X STORE";
+                body.innerHTML = `
+                    <p>A HA4X STORE é focada em oferecer as melhores configurações, painéis e otimizações para mobile.</p>
+                    <p>Garantimos suporte dedicado e atualizações constantes de todos os produtos oferecidos no site.</p>
+                `;
+            }
+
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+            document.getElementById('infoModal').style.display = 'flex';
+        }
+
+        function clearReviewForm() {
+            const author = document.getElementById('reviewAuthor');
+            const content = document.getElementById('reviewContent');
+            if (author) author.value = '';
+            if (content) content.value = '';
+            closeInfoModal();
+        }
+
+        function submitReview() {
+            const author = document.getElementById('reviewAuthor').value.trim();
+            const content = document.getElementById('reviewContent').value.trim();
+
+            if (!author || !content) {
+                alert('Por favor, preencha o seu nome/usuário e a sua avaliação.');
+                return;
+            }
+
+            // Criar e adicionar o novo elemento de avaliação dinamicamente
+            const reviewsList = document.getElementById('reviewsList');
+            const newBox = document.createElement('div');
+            newBox.className = 'review-box';
+            newBox.innerHTML = `
+                <div class="review-header">
+                    <span class="review-author"><i class="fas fa-user-circle"></i> ${author.startsWith('@') ? author : '@' + author}</span>
+                    <span class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                </div>
+                <div class="review-text">${content}</div>
+                <div class="review-date">Enviado agora - Verificado <i class="fas fa-check-circle" style="color:var(--primary-green)"></i></div>
+            `;
+
+            reviewsList.insertBefore(newBox, reviewsList.firstChild);
+
+            // Limpar formulário
+            document.getElementById('reviewAuthor').value = '';
+            document.getElementById('reviewContent').value = '';
+
+            // Notificação Toast e Fechar Modal
+            showNotification("Avaliação enviada com sucesso!");
+            closeInfoModal();
+        }
+
+        function closeInfoModal() {
+            document.getElementById('infoModal').style.display = 'none';
+        }
+
+        /* LÓGICA DO MODAL DE PLANOS E SELEÇÃO */
+        let currentProductName = '';
+        let selectedPeriod = '';
+        let selectedPrice = '';
+
+        const plansData = {
+            'ha4x': [
+                { period: '1 Dia', price: 'R$ 4,99' },
+                { period: '3 Dias', price: 'R$ 7,99' },
+                { period: 'Semanal (7 Dias)', price: 'R$ 19,99' },
+                { period: 'Mensal (30 Dias)', price: 'R$ 30,00' },
+                { period: 'Permanente (Pagamento Único)', price: 'R$ 75,00' }
+            ],
+            'freestyle': [
+                { period: 'Permanente (Pagamento Único)', price: 'R$ 15,00' }
+            ],
+            'carteira': [
+                { period: 'Permanente (Pagamento Único)', price: 'R$ 20,00' }
+            ],
+            'textura': [
+                { period: 'Permanente (Pagamento Único)', price: 'R$ 10,00' }
+            ],
+            'codigos': [
+                { period: 'Permanente (Pagamento Único)', price: 'R$ 30,00' }
+            ]
+        };
+
+        function openPlanModal(productName, productKey) {
+            currentProductName = productName;
+            document.getElementById('planProductTitle').innerText = productName;
+
+            const container = document.getElementById('planOptionsContainer');
+            container.innerHTML = '';
+
+            const plans = plansData[productKey] || [];
+            plans.forEach((plan, index) => {
+                const isFirst = index === 0;
+                if (isFirst) {
+                    selectedPeriod = plan.period;
+                    selectedPrice = plan.price;
                 }
 
-                let maxX = window.innerWidth - targetElement.offsetWidth;
-                let maxY = window.innerHeight - targetElement.offsetHeight;
-
-                x = Math.max(0, Math.min(x, maxX));
-                y = Math.max(0, Math.min(y, maxY));
-
-                targetElement.style.left = x + 'px';
-                targetElement.style.top = y + 'px';
-                
-                currentX = x;
-                currentY = y;
-                e.preventDefault();
-            }, {passive: false});
-
-            document.addEventListener('touchend', () => {
-                dragging = false;
+                const card = document.createElement('div');
+                card.className = `plan-card ${isFirst ? 'selected' : ''}`;
+                card.onclick = () => selectPlanOption(card, plan.period, plan.price);
+                card.innerHTML = `
+                    <span class="plan-info-title"><i class="fas fa-check-circle" style="color:var(--primary-green); margin-right:6px;"></i> ${plan.period}</span>
+                    <span class="plan-price-tag">${plan.price}</span>
+                `;
+                container.appendChild(card);
             });
 
-            handleElement.addEventListener('mousedown', (e) => {
-                dragging = true;
-                hasMoved = false;
-                let coords = getRotatedCoordinates(e);
-                sX = coords.x - targetElement.offsetLeft;
-                sY = coords.y - targetElement.offsetTop;
-            });
+            document.getElementById('planModal').style.display = 'flex';
+        }
 
-            document.addEventListener('mousemove', (e) => {
-                if (!dragging) return;
-                let coords = getRotatedCoordinates(e);
-                let x = coords.x - sX;
-                let y = coords.y - sY;
+        function selectPlanOption(element, period, price) {
+            const allCards = document.querySelectorAll('.plan-card');
+            allCards.forEach(c => c.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedPeriod = period;
+            selectedPrice = price;
+        }
 
-                if (Math.abs(x - targetElement.offsetLeft) > 2 || Math.abs(y - targetElement.offsetTop) > 2) {
-                    hasMoved = true;
+        function closePlanModal() {
+            document.getElementById('planModal').style.display = 'none';
+        }
+
+        function confirmPurchase() {
+            const phone = "5527999628643";
+            const textMessage = `Olá! Quero adquirir o *${currentProductName}* no plano *${selectedPeriod}* no valor de *${selectedPrice}*. Pode me prestar suporte e me enviar o acesso por gentileza?`;
+            const encoded = encodeURIComponent(textMessage);
+            window.open(`https://wa.me/${phone}?text=${encoded}`, '_blank');
+            closePlanModal();
+        }
+
+        /* EFEITO DE PARTÍCULAS NO FUNDO */
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const particles = [];
+        const particleCount = 45;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.radius = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.8;
+                this.speedY = (Math.random() - 0.5) * 0.8;
+                this.alpha = Math.random() * 0.5 + 0.3;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0, 255, 102, ${this.alpha})`;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = '#00ff66';
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a; b < particles.length; b++) {
+                    let dx = particles[a].x - particles[b].x;
+                    let dy = particles[a].y - particles[b].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 110) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(0, 255, 102, ${1 - distance / 110 * 0.8})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
                 }
+            }
 
-                let maxX = window.innerWidth - targetElement.offsetWidth;
-                let maxY = window.innerHeight - targetElement.offsetHeight;
-
-                x = Math.max(0, Math.min(x, maxX));
-                y = Math.max(0, Math.min(y, maxY));
-
-                targetElement.style.left = x + 'px';
-                targetElement.style.top = y + 'px';
-                
-                currentX = x;
-                currentY = y;
+            particles.forEach(p => {
+                p.update();
+                p.draw();
             });
 
-            document.addEventListener('mouseup', () => {
-                dragging = false;
-            });
+            requestAnimationFrame(animateParticles);
         }
 
-        initDrag(container, container);
-        initDrag(menu, header);
-
-        function openMenu() {
-            if (!hasMoved) {
-                container.style.display = 'none';
-                menu.style.left = currentX + 'px';
-                menu.style.top = currentY + 'px';
-                menu.style.display = 'block';
-            }
-        }
-
-        function closeMenuToIcon() {
-            menu.style.display = 'none';
-            container.style.left = currentX + 'px';
-            container.style.top = currentY + 'px';
-            container.style.display = 'block';
-        }
-
-        function hideEverything() {
-            menu.style.display = 'none';
-            container.style.display = 'none';
-            restoreBtn.style.display = 'flex';
-        }
-
-        function restoreIcon() {
-            restoreBtn.style.display = 'none';
-            container.style.left = currentX + 'px';
-            container.style.top = currentY + 'px';
-            container.style.display = 'block';
-        }
-
-        function switchTab(tabId, btn) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
-        }
-
-        function toggleBtn(btn) {
-            if (btn.classList.contains('active')) {
-                btn.classList.remove('active');
-                btn.innerText = btn.innerText.replace(': ON', ': OFF');
-            } else {
-                btn.classList.add('active');
-                btn.innerText = btn.innerText.replace(': OFF', ': ON');
-            }
-        }
-
-        function updateFov(val) {
-            document.getElementById('fov-val').innerText = val;
-        }
+        animateParticles();
     </script>
 </body>
 </html>
